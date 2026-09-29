@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden}
+#c{position:fixed;inset:0}
+h1{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;margin:0 20px;font:italic 700 34px Georgia,serif;color:#8a0303;text-shadow:0 0 12px #500;opacity:0;animation:show 3s 3.5s forwards,fl 4s 6.5s infinite}
+@keyframes show{to{opacity:1}}
+@keyframes fl{0%,90%,100%{opacity:1}93%{opacity:.4}96%{opacity:.9}}
+</style></head><body>
+<canvas id="c"></canvas>
+<h1>часть чего-то большего</h1>
+<script>
+try{Telegram.WebApp.ready();Telegram.WebApp.expand()}catch(e){}
+const c=document.getElementById('c'),x=c.getContext('2d');
+c.width=innerWidth;c.height=innerHeight;
+const W=c.width,H=c.height,n=Math.ceil(W/14),d=[];
+for(let i=0;i<n;i++)d.push({x:i*14+7,w:6+Math.random()*10,y:0,v:.6+Math.random()*2.2,lim:H*(.35+Math.random()*.65),s:Math.random()*120});
+let t=0;
+function f(){t++;x.clearRect(0,0,W,H);
+d.forEach(o=>{if(t<o.s)return;
+if(o.y<o.lim)o.y+=o.v*(1-o.y/o.lim*.6);
+const g=x.createLinearGradient(0,0,0,o.y+1);
+g.addColorStop(0,'#3a0000');g.addColorStop(1,'#8a0303');
+x.fillStyle=g;x.fillRect(o.x-o.w/2,0,o.w,o.y);
+x.beginPath();x.arc(o.x,o.y,o.w/2+1,0,7);x.fill();});
+requestAnimationFrame(f)}f();
+</script></body></html>
