@@ -1,0 +1,364 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Part of Something Greater</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #030303;
+    color: #eeeeee;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+/* Тонкий свет в центре */
+
+.glow {
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    background: rgba(100, 0, 0, 0.12);
+
+    filter: blur(80px);
+
+    opacity: 0;
+
+    animation: glowAppear 4s ease forwards;
+}
+
+/* Кровавая капля */
+
+.drop {
+    position: absolute;
+
+    top: -70px;
+    left: 50%;
+
+    width: 32px;
+    height: 48px;
+
+    background: linear-gradient(
+        to bottom,
+        #d40000,
+        #680000
+    );
+
+    border-radius: 55% 55% 65% 65%;
+
+    transform: translateX(-50%);
+
+    box-shadow:
+        0 0 20px rgba(170, 0, 0, 0.5);
+
+    animation: dropFall 3s cubic-bezier(.7,0,.2,1) forwards;
+}
+
+/* След */
+
+.trail {
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 3px;
+    height: 0;
+
+    transform: translateX(-50%);
+
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        #720000
+    );
+
+    animation: trailGrow 3s ease forwards;
+}
+
+/* Основная надпись */
+
+.title {
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 2px;
+
+    font-size: clamp(25px, 7vw, 48px);
+
+    font-weight: 400;
+
+    letter-spacing: 0;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    animation:
+        titleAppear 2.5s cubic-bezier(.2,.8,.2,1)
+        3s forwards;
+}
+
+/* Каждая буква */
+
+.letter {
+    display: inline-block;
+
+    opacity: 0;
+
+    transform:
+        translateY(25px)
+        rotateX(80deg);
+
+    animation:
+        letterAppear 1s cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+/* Небольшая задержка каждой буквы */
+
+.letter:nth-child(1)  { animation-delay: 3.05s; }
+.letter:nth-child(2)  { animation-delay: 3.10s; }
+.letter:nth-child(3)  { animation-delay: 3.15s; }
+.letter:nth-child(4)  { animation-delay: 3.20s; }
+.letter:nth-child(5)  { animation-delay: 3.25s; }
+.letter:nth-child(6)  { animation-delay: 3.30s; }
+.letter:nth-child(7)  { animation-delay: 3.35s; }
+.letter:nth-child(8)  { animation-delay: 3.40s; }
+.letter:nth-child(9)  { animation-delay: 3.45s; }
+.letter:nth-child(10) { animation-delay: 3.50s; }
+.letter:nth-child(11) { animation-delay: 3.55s; }
+.letter:nth-child(12) { animation-delay: 3.60s; }
+.letter:nth-child(13) { animation-delay: 3.65s; }
+.letter:nth-child(14) { animation-delay: 3.70s; }
+.letter:nth-child(15) { animation-delay: 3.75s; }
+.letter:nth-child(16) { animation-delay: 3.80s; }
+.letter:nth-child(17) { animation-delay: 3.85s; }
+.letter:nth-child(18) { animation-delay: 3.90s; }
+.letter:nth-child(19) { animation-delay: 3.95s; }
+
+/* Подпись */
+
+.subtitle {
+    position: absolute;
+
+    top: calc(50% + 55px);
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 7px;
+
+    text-transform: uppercase;
+
+    color: rgba(255,255,255,0.35);
+
+    opacity: 0;
+
+    animation:
+        subtitleAppear 2s ease
+        5s forwards;
+}
+
+/* Анимации */
+
+@keyframes dropFall {
+
+    0% {
+        top: -70px;
+        transform:
+            translateX(-50%)
+            scale(.7);
+    }
+
+    65% {
+        top: 43%;
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    75% {
+        top: 46%;
+        transform:
+            translateX(-50%)
+            scale(1.2,.8);
+    }
+
+    100% {
+        top: 46%;
+        transform:
+            translateX(-50%)
+            scale(0);
+    }
+}
+
+@keyframes trailGrow {
+
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    75% {
+        height: 46%;
+    }
+
+    100% {
+        height: 46%;
+        opacity: 0;
+    }
+}
+
+@keyframes titleAppear {
+
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes letterAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            rotateX(80deg);
+
+        filter: blur(5px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            rotateX(0);
+
+        filter: blur(0);
+    }
+}
+
+@keyframes subtitleAppear {
+
+    0% {
+        opacity: 0;
+        letter-spacing: 12px;
+    }
+
+    100% {
+        opacity: .35;
+        letter-spacing: 7px;
+    }
+}
+
+@keyframes glowAppear {
+
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+    <div class="glow"></div>
+
+    <div class="trail"></div>
+
+    <div class="drop"></div>
+
+    <div class="title">
+
+        <span class="letter">ч</span>
+        <span class="letter">а</span>
+        <span class="letter">с</span>
+        <span class="letter">т</span>
+        <span class="letter">ь</span>
+
+        <span>&nbsp;</span>
+
+        <span class="letter">ч</span>
+        <span class="letter">е</span>
+        <span class="letter">г</span>
+        <span class="letter">о</span>
+        <span class="letter">-</span>
+        <span class="letter">т</span>
+        <span class="letter">о</span>
+
+        <span>&nbsp;</span>
+
+        <span class="letter">б</span>
+        <span class="letter">о</span>
+        <span class="letter">л</span>
+        <span class="letter">ь</span>
+        <span class="letter">ш</span>
+        <span class="letter">е</span>
+        <span class="letter">г</span>
+        <span class="letter">о</span>
+
+    </div>
+
+    <div class="subtitle">
+        part of something greater
+    </div>
+
+</div>
+
+</body>
+</html>
+```
